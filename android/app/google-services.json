@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125618406655",
+    "project_id": "lemke-beathouse",
+    "storage_bucket": "lemke-beathouse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125618406655:android:79c243c7de7a46b3ae78ca",
+        "android_client_info": {
+          "package_name": "com.lemke.beathouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125618406655-j7oub97st2s4q433r4jjgonqgj8r0361.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lemke.beathouse",
+            "certificate_hash": "a956a02b5d3237670104165cb8b3d806923cabaa"
+          }
+        },
+        {
+          "client_id": "125618406655-72dd2c4eq2ba12n48o66s0q73o4iop2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzS_aE5OnesyoD_EKAklK9maBYTIK68kQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125618406655-72dd2c4eq2ba12n48o66s0q73o4iop2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
