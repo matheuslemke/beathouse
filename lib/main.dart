@@ -1,6 +1,20 @@
+import 'package:beathouse/model/folder.dart';
+import 'package:beathouse/model/song.dart';
+import 'package:beathouse/services/song_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:uuid/uuid.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+    apiKey: dotenv.env['FIREBASE_API_KEY'] ?? '',
+    appId: dotenv.env['FIREBASE_APP_ID'] ?? '',
+    messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '',
+    projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? '',
+  ));
   runApp(const MyApp());
 }
 
@@ -102,6 +116,15 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            MaterialButton(
+              child: const Text("Add song"),
+              onPressed: () {
+                Folder folder = Folder("First");
+                var id = const Uuid().v1();
+                Song song = Song(id, "Song", 120, "Lemke", folder);
+                SongService().save(song);
+              },
+            )
           ],
         ),
       ),
