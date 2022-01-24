@@ -1,4 +1,4 @@
-import 'package:beathouse/components/homepage.dart';
+import 'package:beathouse/pages/homepage.dart';
 import 'package:beathouse/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
