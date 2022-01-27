@@ -6,15 +6,21 @@ class Player extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextFormField(
-          initialValue: 'Input text',
-          decoration: const InputDecoration(
-            labelText: 'Label text',
-            errorText: 'Error message',
-            border: OutlineInputBorder(),
-            suffixIcon: Icon(
-              Icons.error,
+        Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: 80,
+            child: TextFormField(
+              initialValue: '80',
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              showCursor: false,
+              style: const TextStyle(fontSize: 30),
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+              ),
             ),
           ),
         ),
