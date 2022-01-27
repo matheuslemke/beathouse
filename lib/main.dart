@@ -1,8 +1,10 @@
 import 'package:beathouse/pages/homepage.dart';
+import 'package:beathouse/providers/page_provider.dart';
 import 'package:beathouse/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
@@ -13,19 +15,24 @@ void main() async {
     messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '',
     projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? '',
   ));
-  runApp(const MyApp());
+  runApp(const Main());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Main extends StatelessWidget {
+  const Main({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: theme,
-      home: const Homepage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<PageProvider>(create: (_) => PageProvider())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: true,
+        title: 'Beathouse',
+        theme: theme,
+        home: const Homepage(),
+      ),
     );
   }
 }
