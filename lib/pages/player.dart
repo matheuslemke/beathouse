@@ -24,6 +24,21 @@ class Player extends StatelessWidget {
             ),
           ),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              child: const Icon(Icons.remove),
+              style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Icon(Icons.add),
+              style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+            )
+          ],
+        )
       ],
     );
   }
