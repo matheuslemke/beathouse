@@ -1,5 +1,6 @@
 import 'package:beathouse/pages/homepage.dart';
 import 'package:beathouse/providers/page_provider.dart';
+import 'package:beathouse/providers/player_beat_provider.dart';
 import 'package:beathouse/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,9 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<PageProvider>(create: (_) => PageProvider())
+        ChangeNotifierProvider<PageProvider>(create: (_) => PageProvider()),
+        ChangeNotifierProvider<PlayerBeatProvider>(
+            create: (_) => PlayerBeatProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: true,

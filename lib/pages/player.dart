@@ -1,4 +1,6 @@
+import 'package:beathouse/providers/player_beat_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Player extends StatelessWidget {
   const Player({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class Player extends StatelessWidget {
           child: SizedBox(
             width: 80,
             child: TextFormField(
-              initialValue: '80',
+              controller: context.read<PlayerBeatProvider>().controller,
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               showCursor: false,
@@ -28,12 +30,16 @@ class Player extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<PlayerBeatProvider>().decrease();
+              },
               child: const Icon(Icons.remove),
               style: ElevatedButton.styleFrom(shape: const CircleBorder()),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<PlayerBeatProvider>().increase();
+              },
               child: const Icon(Icons.add),
               style: ElevatedButton.styleFrom(shape: const CircleBorder()),
             )
