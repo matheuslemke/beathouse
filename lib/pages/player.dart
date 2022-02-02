@@ -1,4 +1,5 @@
 import 'package:beathouse/providers/player_beat_provider.dart';
+import 'package:beathouse/providers/player_sound_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,9 +33,6 @@ class Player extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 context.read<PlayerBeatProvider>().decrease();
-                // Maybe use a countdown class
-                // Or count up
-                // SystemSound.play(SystemSoundType.click)
               },
               child: const Icon(Icons.remove),
               style: ElevatedButton.styleFrom(shape: const CircleBorder()),
@@ -47,6 +45,15 @@ class Player extends StatelessWidget {
               style: ElevatedButton.styleFrom(shape: const CircleBorder()),
             )
           ],
+        ),
+        ElevatedButton(
+          onPressed: () {
+            context.read<PlayerSoundProvider>().playPause(context);
+          },
+          child: context.watch<PlayerSoundProvider>().isPlaying
+              ? const Icon(Icons.pause)
+              : const Icon(Icons.play_arrow),
+          style: ElevatedButton.styleFrom(shape: const CircleBorder()),
         )
       ],
     );

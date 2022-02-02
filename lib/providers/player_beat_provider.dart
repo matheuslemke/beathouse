@@ -12,14 +12,12 @@ class PlayerBeatProvider extends ChangeNotifier {
 
   TextEditingController get controller => _controller;
 
-  // Maybe put here the timer start
   void increase() {
     _currentBeat++;
     _updateText();
     notifyListeners();
   }
 
-  // ... or here
   void decrease() {
     _currentBeat--;
     _updateText();
