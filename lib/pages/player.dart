@@ -32,6 +32,9 @@ class Player extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 context.read<PlayerBeatProvider>().decrease();
+                // Maybe use a countdown class
+                // Or count up
+                // SystemSound.play(SystemSoundType.click)
               },
               child: const Icon(Icons.remove),
               style: ElevatedButton.styleFrom(shape: const CircleBorder()),
