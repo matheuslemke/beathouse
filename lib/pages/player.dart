@@ -24,7 +24,9 @@ class Player extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
               onSubmitted: (v) {
-                context.read<PlayerBeatProvider>().currentBeat = int.parse(v);
+                context
+                    .read<PlayerBeatProvider>()
+                    .setCurrentBeat(int.parse(v), context);
               },
             ),
           ),

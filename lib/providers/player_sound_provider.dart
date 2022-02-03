@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 class PlayerSoundProvider extends ChangeNotifier {
   bool _isPlaying = false;
+  Timer _timer = Timer(Duration.zero, () {});
 
   get isPlaying => _isPlaying;
 
@@ -16,12 +17,17 @@ class PlayerSoundProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void cancelTimer(BuildContext context) {
+    _timer.cancel();
+    _click(context);
+  }
+
   void _click(BuildContext context) {
     int currentBeat = context.read<PlayerBeatProvider>().currentBeat;
 
     debugPrint(currentBeat.toString() + ' click');
 
-    Timer(Duration(milliseconds: 60000 ~/ currentBeat), () {
+    _timer = Timer(Duration(milliseconds: 60000 ~/ currentBeat), () {
       SystemSound.play(SystemSoundType.click);
       if (_isPlaying) {
         _click(context);
