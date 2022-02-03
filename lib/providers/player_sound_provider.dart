@@ -19,11 +19,10 @@ class PlayerSoundProvider extends ChangeNotifier {
   void _click(BuildContext context) {
     int currentBeat = context.read<PlayerBeatProvider>().currentBeat;
 
-    debugPrint(currentBeat.toString());
+    debugPrint(currentBeat.toString() + ' click');
 
     Timer(Duration(milliseconds: 60000 ~/ currentBeat), () {
       SystemSound.play(SystemSoundType.click);
-      debugPrint('click');
       if (_isPlaying) {
         _click(context);
       }

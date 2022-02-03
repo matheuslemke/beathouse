@@ -15,18 +15,16 @@ class Player extends StatelessWidget {
           alignment: Alignment.center,
           child: SizedBox(
             width: 80,
-            child: TextFormField(
+            child: TextField(
               controller: context.read<PlayerBeatProvider>().controller,
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
-              showCursor: false,
               style: const TextStyle(fontSize: 30),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
-              onChanged: (v) {
+              onSubmitted: (v) {
                 context.read<PlayerBeatProvider>().currentBeat = int.parse(v);
-                context.read<PlayerSoundProvider>().playPause(context);
               },
             ),
           ),
