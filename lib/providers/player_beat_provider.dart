@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 
 class PlayerBeatProvider extends ChangeNotifier {
-  int _currentBeat = 80;
+  int currentBeat = 80;
   final TextEditingController _controller = TextEditingController();
 
   PlayerBeatProvider() {
     _updateText();
   }
 
-  int get currentBeat => _currentBeat;
-
   TextEditingController get controller => _controller;
 
   void increase() {
-    _currentBeat++;
+    currentBeat++;
     _updateText();
     notifyListeners();
   }
 
   void decrease() {
-    _currentBeat--;
+    currentBeat--;
     _updateText();
     notifyListeners();
   }
 
   void _updateText() {
-    _controller.text = '$_currentBeat';
+    _controller.text = '$currentBeat';
   }
 }

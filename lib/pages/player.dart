@@ -24,6 +24,10 @@ class Player extends StatelessWidget {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
+              onChanged: (v) {
+                context.read<PlayerBeatProvider>().currentBeat = int.parse(v);
+                context.read<PlayerSoundProvider>().playPause(context);
+              },
             ),
           ),
         ),
@@ -48,6 +52,7 @@ class Player extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
+            // int currentBeat = context.read<PlayerBeatProvider>().currentBeat;
             context.read<PlayerSoundProvider>().playPause(context);
           },
           child: context.watch<PlayerSoundProvider>().isPlaying
