@@ -22,6 +22,7 @@ class Homepage extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: [player, library, settings],
       onTap: (index) => context.read<PageProvider>().toPage(index),
+      currentIndex: context.read<PageProvider>().currentPageIndex,
     );
 
     return Scaffold(

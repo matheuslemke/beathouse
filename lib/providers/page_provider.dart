@@ -12,6 +12,7 @@ class PageProvider with ChangeNotifier {
     const Settings(),
   ];
 
+  int get currentPageIndex => _currentPage;
   Widget get currentPage => _pages[_currentPage];
 
   void toPage(int index) {
