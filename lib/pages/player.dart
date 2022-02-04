@@ -1,5 +1,4 @@
 import 'package:beathouse/providers/player_beat_provider.dart';
-import 'package:beathouse/providers/player_sound_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,9 +23,7 @@ class Player extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
               onSubmitted: (v) {
-                context
-                    .read<PlayerBeatProvider>()
-                    .setCurrentBeat(int.parse(v), context);
+                context.read<PlayerBeatProvider>().setCurrentBeat(int.parse(v));
               },
             ),
           ),
@@ -52,10 +49,9 @@ class Player extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            // int currentBeat = context.read<PlayerBeatProvider>().currentBeat;
-            context.read<PlayerSoundProvider>().playPause(context);
+            context.read<PlayerBeatProvider>().playPause();
           },
-          child: context.watch<PlayerSoundProvider>().isPlaying
+          child: context.watch<PlayerBeatProvider>().isPlaying
               ? const Icon(Icons.pause)
               : const Icon(Icons.play_arrow),
           style: ElevatedButton.styleFrom(shape: const CircleBorder()),

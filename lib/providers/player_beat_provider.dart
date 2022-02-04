@@ -1,38 +1,69 @@
-import 'package:beathouse/providers/player_sound_provider.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class PlayerBeatProvider extends ChangeNotifier {
+  bool _isPlaying = false;
   int _currentBeat = 80;
+  Timer _timer = Timer(Duration.zero, () {});
   final TextEditingController _controller = TextEditingController();
 
   PlayerBeatProvider() {
     _updateText();
   }
 
-  int get currentBeat => _currentBeat;
+  get isPlaying => _isPlaying;
   TextEditingController get controller => _controller;
 
+  void setCurrentBeat(int beat) {
+    _currentBeat = beat;
+    if (_isPlaying) {
+      _cancelTimer();
+      _click();
+    }
+  }
+
+  void playPause() {
+    if (_isPlaying) {
+      _cancelTimer();
+    } else {
+      _click();
+    }
+    _isPlaying = !_isPlaying;
+    notifyListeners();
+  }
+
   void increase() {
-    _currentBeat++;
+    /// Here the current timer is being stopped and started another one.
+    /// Maybe should await the previous timer?
+    setCurrentBeat(++_currentBeat);
     _updateText();
     notifyListeners();
   }
 
   void decrease() {
-    _currentBeat--;
+    setCurrentBeat(--_currentBeat);
     _updateText();
-    notifyListeners();
-  }
-
-  void setCurrentBeat(int beat, BuildContext context) {
-    _currentBeat = beat;
-    // check if is playing
-    context.read<PlayerSoundProvider>().cancelTimer(context);
     notifyListeners();
   }
 
   void _updateText() {
     _controller.text = '$_currentBeat';
+  }
+
+  void _cancelTimer() {
+    _timer.cancel();
+  }
+
+  void _click() {
+    debugPrint(_currentBeat.toString() + ' click');
+
+    _timer = Timer(Duration(milliseconds: 60000 ~/ _currentBeat), () {
+      SystemSound.play(SystemSoundType.click);
+      if (_isPlaying) {
+        _click();
+      }
+    });
   }
 }
