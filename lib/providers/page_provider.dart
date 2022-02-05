@@ -4,7 +4,7 @@ import 'package:beathouse/pages/settings.dart';
 import 'package:flutter/material.dart';
 
 class PageProvider with ChangeNotifier {
-  int _currentPage = 0;
+  int _currentPage = 1;
 
   final List<Widget> _pages = [
     const Player(),
