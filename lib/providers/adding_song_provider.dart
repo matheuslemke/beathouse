@@ -12,8 +12,7 @@ class AddingSongProvider extends ChangeNotifier {
     String name = _nameController.text.toString();
     int rate = int.parse(_rateController.text.toString());
     Song song = Song(const Uuid().v4(), name, rate, 'artist', Folder('folder'));
-    await SongService().save(song);
-    print('salvou');
+    SongService().save(song);
   }
 
   get nameController => _nameController;
