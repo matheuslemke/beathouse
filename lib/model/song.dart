@@ -19,4 +19,9 @@ class Song {
       'folder': folder.toMap(),
     };
   }
+
+  static Song fromMap(Map<String, dynamic> data) {
+    return Song(data["id"], data["name"], data["rate"], data["artist"],
+        Folder(data["folder"]["name"]));
+  }
 }
