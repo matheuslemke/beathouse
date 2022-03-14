@@ -16,7 +16,23 @@ class Library extends StatelessWidget {
             List<Song> songs = (snapshot.data as List<Song>);
             return ListView.separated(
               itemBuilder: (context, index) {
-                return Text(songs[index].name.toString());
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(songs[index].name.toString()),
+                    Row(
+                      children: [
+                        Text(songs[index].rate.toString()),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Icon(Icons.play_arrow),
+                          style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder()),
+                        )
+                      ],
+                    )
+                  ],
+                );
               },
               separatorBuilder: (context, index) => const Divider(),
               itemCount: songs.length,
