@@ -14,6 +14,7 @@ class Library extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             List<Song> songs = (snapshot.data as List<Song>);
+            //TODO: change to ExpansionPanel
             return ListView.separated(
               itemBuilder: (context, index) {
                 return Row(
@@ -23,6 +24,15 @@ class Library extends StatelessWidget {
                     Row(
                       children: [
                         Text(songs[index].rate.toString()),
+                        ElevatedButton(
+                          onPressed: () {
+                            goToAddEditSong(context, songs[index]);
+                            //TODO: refetch data
+                          },
+                          child: const Icon(Icons.edit),
+                          style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder()),
+                        ),
                         ElevatedButton(
                           onPressed: () {},
                           child: const Icon(Icons.play_arrow),
@@ -45,10 +55,14 @@ class Library extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddSong()));
+          goToAddEditSong(context, null);
         },
       ),
     );
+  }
+
+  Future<dynamic> goToAddEditSong(BuildContext context, Song? song) {
+    return Navigator.push(
+        context, MaterialPageRoute(builder: (context) => AddSong(song: song)));
   }
 }
