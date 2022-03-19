@@ -22,6 +22,7 @@ class PlayerBeatProvider extends ChangeNotifier {
       _cancelTimer();
       _click();
     }
+    _updateText();
   }
 
   void playPause() {
