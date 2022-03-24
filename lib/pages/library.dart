@@ -15,6 +15,9 @@ class Library extends StatelessWidget {
         future: SongService().list(),
         builder: (builderContext, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data == null) {
+              return const Text('No results found.');
+            }
             List<Song> songs = (snapshot.data as List<Song>);
             //TODO: change to ExpansionPanel
             return ListView.separated(

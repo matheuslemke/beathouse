@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class SongService {
   void save(Song song) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-
     await db.collection('songs').doc(song.id).set(song.toMap());
   }
 
