@@ -1,6 +1,7 @@
 import 'package:beathouse/model/song.dart';
 import 'package:beathouse/pages/add_song.dart';
 import 'package:beathouse/providers/page_provider.dart';
+import 'package:beathouse/providers/song_list_provider.dart';
 import 'package:beathouse/services/song_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,9 +11,10 @@ class Library extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SongListProvider songListProvider = context.read<SongListProvider>();
     return Scaffold(
       body: FutureBuilder(
-        future: SongService().list(),
+        future: context.watch<SongListProvider>().songs,
         builder: (builderContext, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null) {
@@ -30,9 +32,9 @@ class Library extends StatelessWidget {
                       children: [
                         Text(songs[index].rate.toString()),
                         ElevatedButton(
-                          onPressed: () {
-                            goToAddEditSong(listContext, songs[index]);
-                            //TODO: refetch data
+                          onPressed: () async {
+                            await goToAddEditSong(listContext, songs[index]);
+                            songListProvider.refetch();
                           },
                           child: const Icon(Icons.edit),
                           style: ElevatedButton.styleFrom(
@@ -41,7 +43,7 @@ class Library extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             removeSong(songs[index]);
-                            //TODO: refetch data
+                            songListProvider.refetch();
                           },
                           child: const Icon(Icons.delete),
                           style: ElevatedButton.styleFrom(
@@ -70,8 +72,9 @@ class Library extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {
-          goToAddEditSong(context, null);
+        onPressed: () async {
+          await goToAddEditSong(context, null);
+          songListProvider.refetch();
         },
       ),
     );
