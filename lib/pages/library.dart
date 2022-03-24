@@ -40,6 +40,15 @@ class Library extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
+                            removeSong(songs[index]);
+                            //TODO: refetch data
+                          },
+                          child: const Icon(Icons.delete),
+                          style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder()),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
                             playSong(context, songs[index]);
                           },
                           child: const Icon(Icons.play_arrow),
@@ -75,5 +84,9 @@ class Library extends StatelessWidget {
 
   void playSong(BuildContext context, Song song) {
     context.read<PageProvider>().toPlayer(context, song);
+  }
+
+  void removeSong(Song song) {
+    SongService().remove(song);
   }
 }

@@ -6,7 +6,7 @@ class Song {
   final int rate;
   final String artist;
   final Folder folder;
-  final bool public = true;
+  final String visibility = 'public';
 
   Song(this.id, this.name, this.rate, this.artist, this.folder);
 
@@ -18,7 +18,7 @@ class Song {
       'rate': rate,
       'artist': artist,
       'folder': folder.toMap(),
-      'public': public,
+      'visibility': visibility,
     };
   }
 
