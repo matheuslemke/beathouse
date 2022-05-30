@@ -2,7 +2,7 @@
 
 FILE=.env
 
-if [-f "$FILE"]; then
+if [ -f "$FILE" ]; then
   echo ".env already exists."
 else
   touch $FILE
